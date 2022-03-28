@@ -20,11 +20,12 @@ class Ledger {
   }
 
   loan(...args) {
+    // console.log(args, ".......");
     let [bank, borrowerName, principal, year, rate] = args;
     this.borrowers[borrowerName] = {};
-    this.borrowers[borrowerName].principal = principal;
-    this.borrowers[borrowerName].rateOfInterest = rate;
-    this.borrowers[borrowerName].year = year;
+    this.borrowers[borrowerName].principal = Number(principal);
+    this.borrowers[borrowerName].rateOfInterest = Number(rate);
+    this.borrowers[borrowerName].year = Number(year);
     this.borrowers[borrowerName].numberOfEMI = getNumberOfEMI(year);
     this.borrowers[borrowerName].amountToPay = getAmountToPay(
       Number(principal),
@@ -36,10 +37,12 @@ class Ledger {
       this.borrowers[borrowerName].amountToPay
     );
     this.borrowers[borrowerName].lumpsum = [];
+    // this.displayStructure();
   }
 
   payment(args) {
     let [bank, borrowerName, lumpsumAmount, EmiNumber] = args;
+    EmiNumber = Number(EmiNumber);
     this.borrowers[borrowerName].lumpsum.push({ lumpsumAmount, EmiNumber });
   }
 
@@ -65,6 +68,7 @@ class Ledger {
       result.push(this.borrowers[borrowerName].amountToPay);
       result.push(0);
     }
+    console.log(result);
     return result;
   }
 
@@ -72,6 +76,7 @@ class Ledger {
     console.log(
       util.inspect(this.borrowers, false, null, true /* enable colors */)
     );
+    return { ...this.borrowers };
   }
 }
 

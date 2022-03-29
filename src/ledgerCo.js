@@ -7,7 +7,11 @@ const getAmountToPay = function (principal, year, rate) {
 };
 
 const getEMIAmount = function (numberOfEMI, amountToPay) {
-  return Math.ceil(amountToPay / numberOfEMI);
+  if (amountToPay > 0) {
+    return Math.ceil(amountToPay / numberOfEMI);
+  } else {
+    return 0;
+  }
 };
 
 const getNumberOfEMI = function (year) {
@@ -68,14 +72,14 @@ class Ledger {
       result.push(this.borrowers[borrowerName].amountToPay);
       result.push(0);
     }
-    console.log(result);
+    // console.log(result);
     return result;
   }
 
   displayStructure() {
-    console.log(
-      util.inspect(this.borrowers, false, null, true /* enable colors */)
-    );
+    // console.log(
+    //   util.inspect(this.borrowers, false, null, true /* enable colors */)
+    // );
     return { ...this.borrowers };
   }
 }

@@ -8,7 +8,7 @@ describe("#ledgerCO", () => {
       const expected = {
         Dale: {
           principal: 10000,
-          rateOfInterest: 4,
+          rate: 4,
           year: 5,
           numberOfEMI: 60,
           amountToPay: 12000,
@@ -29,7 +29,7 @@ describe("#ledgerCO", () => {
       const expected = {
         Dale: {
           principal: 10000,
-          rateOfInterest: 4,
+          rate: 4,
           year: 5,
           numberOfEMI: 60,
           amountToPay: 12000,
@@ -47,7 +47,12 @@ describe("#ledgerCO", () => {
 
   describe("balance", () => {
     it("It should return the balance of perticular borrower", () => {
-      const expected = ["IDIDI", "Dale", 800, 56];
+      const expected = {
+        bank: "IDIDI",
+        name: "Dale",
+        amountToPay: 800,
+        emiRemaining: 56,
+      };
       const ledger = new Ledger();
       ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
       ledger.payment(["IDIDI", "Dale", "7000", "12"]);
@@ -62,7 +67,7 @@ describe("#ledgerCO", () => {
       const expected = {
         Dale: {
           principal: 10000,
-          rateOfInterest: 4,
+          rate: 4,
           year: 5,
           numberOfEMI: 60,
           amountToPay: 12000,
@@ -71,7 +76,7 @@ describe("#ledgerCO", () => {
         },
         Harry: {
           principal: 50000,
-          rateOfInterest: 5,
+          rate: 5,
           year: 6,
           numberOfEMI: 72,
           amountToPay: 65000,
@@ -80,7 +85,7 @@ describe("#ledgerCO", () => {
         },
         Shelly: {
           principal: 60000,
-          rateOfInterest: 11,
+          rate: 11,
           year: 10,
           numberOfEMI: 120,
           amountToPay: 126000,
@@ -102,7 +107,7 @@ describe("#ledgerCO", () => {
       const expected = {
         Dale: {
           principal: 0,
-          rateOfInterest: 0,
+          rate: 0,
           year: 0,
           numberOfEMI: 0,
           amountToPay: 0,
@@ -122,7 +127,7 @@ describe("#ledgerCO", () => {
       const expected = {
         Dale: {
           principal: 10000,
-          rateOfInterest: 4,
+          rate: 4,
           year: 5,
           numberOfEMI: 60,
           amountToPay: 12000,
@@ -146,7 +151,7 @@ describe("#ledgerCO", () => {
       const expected = {
         Dale: {
           principal: 10000,
-          rateOfInterest: 4,
+          rate: 4,
           year: 5,
           numberOfEMI: 60,
           amountToPay: 12000,

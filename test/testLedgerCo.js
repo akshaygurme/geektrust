@@ -6,7 +6,7 @@ describe("#ledgerCO", () => {
   describe("loan", () => {
     it("it should store all the attributes in the command", () => {
       const expected = {
-        Dale: {
+        "Dale-IDIDI": {
           principal: 10000,
           rate: 4,
           year: 5,
@@ -27,7 +27,7 @@ describe("#ledgerCO", () => {
   describe("payment", () => {
     it("it should store the lumpsum value Sturucture", () => {
       const expected = {
-        Dale: {
+        "Dale-IDIDI": {
           principal: 10000,
           rate: 4,
           year: 5,
@@ -65,7 +65,7 @@ describe("#ledgerCO", () => {
   describe("Multiple borrowers", () => {
     it("It should add multiple borrowers", () => {
       const expected = {
-        Dale: {
+        "Dale-IDIDI": {
           principal: 10000,
           rate: 4,
           year: 5,
@@ -74,7 +74,7 @@ describe("#ledgerCO", () => {
           EMIAmount: 200,
           lumpsum: [],
         },
-        Harry: {
+        "Harry-IDIDI": {
           principal: 50000,
           rate: 5,
           year: 6,
@@ -83,7 +83,7 @@ describe("#ledgerCO", () => {
           EMIAmount: 903,
           lumpsum: [],
         },
-        Shelly: {
+        "Shelly-IDIDI": {
           principal: 60000,
           rate: 11,
           year: 10,
@@ -105,7 +105,7 @@ describe("#ledgerCO", () => {
   describe("Border case for loan()", () => {
     it("it should store all the attributes in the command", () => {
       const expected = {
-        Dale: {
+        "Dale-IDIDI": {
           principal: 0,
           rate: 0,
           year: 0,
@@ -125,7 +125,7 @@ describe("#ledgerCO", () => {
   describe("Multiple payment", () => {
     it("it should store the multiple lumpsum values in Sturucture", () => {
       const expected = {
-        Dale: {
+        "Dale-IDIDI": {
           principal: 10000,
           rate: 4,
           year: 5,
@@ -149,7 +149,7 @@ describe("#ledgerCO", () => {
   describe("Multiple payment for border cases", () => {
     it("it should store the multiple lumpsum values in Sturucture", () => {
       const expected = {
-        Dale: {
+        "Dale-IDIDI": {
           principal: 10000,
           rate: 4,
           year: 5,

@@ -6,7 +6,7 @@ const main = function (filePath) {
   const commands = fileContent.split("\n"); //getting all the commands by splitting the Input with newline
   const result = processCommands(commands); //passing all the commands
 
-  console.log(result);
+  console.log(result.join("\n"));
 };
 
 main(process.argv[2]);

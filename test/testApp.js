@@ -88,4 +88,61 @@ describe("#App Test", () => {
         assert.deepStrictEqual(actual, expected);
       });
     });
+
+  describe("Test Case 3", () => {
+    it("", () => {
+      const ledger = new Ledger();
+      ledger.loan(...["IDIDI", "Dale", "4000", "3", "4"]);
+      ledger.loan(...["MBI", "Dale", "10000", "3", "7"]);
+
+      ledger.payment(["MBI", "Dale", "2000", "0"]);
+
+      let actual = [];
+      actual.push(ledger.balance(...["IDIDI", "Dale", "3"]));
+      actual.push(ledger.balance(...["IDIDI", "Dale", "0"]));
+      actual.push(ledger.balance(...["MBI", "Dale", "0"]));
+      actual.push(ledger.balance(...["IDIDI", "Dale", "12"]));
+      actual.push(ledger.balance(...["MBI", "Dale", "4"]));
+      actual.push(ledger.balance(...["MBI", "Dale", "30"]));
+      const expected = [
+        {
+          amountToPay: 375,
+          bank: "IDIDI",
+          emiRemaining: 33,
+          name: "Dale",
+        },
+        {
+          amountToPay: 0,
+          bank: "IDIDI",
+          emiRemaining: 36,
+          name: "Dale",
+        },
+        {
+          amountToPay: 2000,
+          bank: "MBI",
+          emiRemaining: 30,
+          name: "Dale",
+        },
+        {
+          amountToPay: 1500,
+          bank: "IDIDI",
+          emiRemaining: 24,
+          name: "Dale",
+        },
+        {
+          amountToPay: 3348,
+          bank: "MBI",
+          emiRemaining: 26,
+          name: "Dale",
+        },
+        {
+          amountToPay: 12100,
+          bank: "MBI",
+          emiRemaining: 0,
+          name: "Dale",
+        },
+      ];
+      assert.deepStrictEqual(actual, expected);
+    });
+  });
 });

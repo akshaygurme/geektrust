@@ -30,7 +30,6 @@ const processCommands = function (commands) {
     let result = performOperation(ledger, operation, ...args);
     result = result ? Object.values(result) : undefined;
     result && output.push(result.join(" "));
-    // console.log(result);
   });
   ledger.displayStructure(); // to display the structure finally created
   return output;

@@ -18,7 +18,7 @@ describe("#ledgerCO", () => {
       };
 
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
+      ledger.loan(...["IDIDI", "Dale", 10000, 5, 4]);
       const borrowers = ledger.displayStructure();
       assert.deepStrictEqual(borrowers, expected);
     });
@@ -34,12 +34,12 @@ describe("#ledgerCO", () => {
           numberOfEMI: 60,
           amountToPay: 12000,
           EMIAmount: 200,
-          lumpsum: [{ lumpsumAmount: "7000", EmiNumber: 12 }],
+          lumpsum: [{ lumpsumAmount: 7000, emiNumber: 12 }],
         },
       };
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
-      ledger.payment(["IDIDI", "Dale", "7000", "12"]);
+      ledger.loan(...["IDIDI", "Dale", 10000, 5, 4]);
+      ledger.payment(...["IDIDI", "Dale", 7000, 12]);
       const borrowers = ledger.displayStructure();
       assert.deepStrictEqual(borrowers, expected);
     });
@@ -54,10 +54,10 @@ describe("#ledgerCO", () => {
         emiRemaining: 56,
       };
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
-      ledger.payment(["IDIDI", "Dale", "7000", "12"]);
+      ledger.loan(...["IDIDI", "Dale", 10000, 5, 4]);
+      ledger.payment(...["IDIDI", "Dale", 7000, 12]);
       ledger.displayStructure();
-      let actual = ledger.balance(...["IDIDI", "Dale", "4"]);
+      let actual = ledger.balance(...["IDIDI", "Dale", 4]);
       assert.deepStrictEqual(actual, expected);
     });
   });
@@ -94,9 +94,9 @@ describe("#ledgerCO", () => {
         },
       };
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
-      ledger.loan(...["IDIDI", "Harry", "50000", "6", "5"]);
-      ledger.loan(...["IDIDI", "Shelly", "60000", "10", "11"]);
+      ledger.loan(...["IDIDI", "Dale", 10000, 5, 4]);
+      ledger.loan(...["IDIDI", "Harry", 50000, 6, 5]);
+      ledger.loan(...["IDIDI", "Shelly", 60000, 10, 11]);
       const borrowers = ledger.displayStructure();
       assert.deepStrictEqual(borrowers, expected);
     });
@@ -117,7 +117,7 @@ describe("#ledgerCO", () => {
       };
 
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "0", "0", "0"]);
+      ledger.loan(...["IDIDI", "Dale", 0, 0, 0]);
       const borrowers = ledger.displayStructure();
       assert.deepStrictEqual(borrowers, expected);
     });
@@ -133,15 +133,15 @@ describe("#ledgerCO", () => {
           amountToPay: 12000,
           EMIAmount: 200,
           lumpsum: [
-            { lumpsumAmount: "7000", EmiNumber: 12 },
-            { lumpsumAmount: "6000", EmiNumber: 13 },
+            { lumpsumAmount: 7000, emiNumber: 12 },
+            { lumpsumAmount: 6000, emiNumber: 13 },
           ],
         },
       };
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
-      ledger.payment(["IDIDI", "Dale", "7000", "12"]);
-      ledger.payment(["IDIDI", "Dale", "6000", "13"]);
+      ledger.loan(...["IDIDI", "Dale", 10000, 5, 4]);
+      ledger.payment(...["IDIDI", "Dale", 7000, 12]);
+      ledger.payment(...["IDIDI", "Dale", 6000, 13]);
       const borrowers = ledger.displayStructure();
       assert.deepStrictEqual(borrowers, expected);
     });
@@ -157,15 +157,15 @@ describe("#ledgerCO", () => {
           amountToPay: 12000,
           EMIAmount: 200,
           lumpsum: [
-            { lumpsumAmount: "0", EmiNumber: 0 },
-            { lumpsumAmount: "0", EmiNumber: 0 },
+            { lumpsumAmount: 0, emiNumber: 0 },
+            { lumpsumAmount: 0, emiNumber: 0 },
           ],
         },
       };
       const ledger = new Ledger();
-      ledger.loan(...["IDIDI", "Dale", "10000", "5", "4"]);
-      ledger.payment(["IDIDI", "Dale", "0", "0"]);
-      ledger.payment(["IDIDI", "Dale", "0", "0"]);
+      ledger.loan(...["IDIDI", "Dale", 10000, 5, 4]);
+      ledger.payment(...["IDIDI", "Dale", 0, 0]);
+      ledger.payment(...["IDIDI", "Dale", 0, 0]);
       const borrowers = ledger.displayStructure();
       assert.deepStrictEqual(borrowers, expected);
     });

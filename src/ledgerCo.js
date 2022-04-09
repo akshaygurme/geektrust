@@ -1,5 +1,3 @@
-const util = require("util");
-
 const getAmountToPay = function (principal, year, rate) {
   let interest = principal * year * (rate / 100);
   return principal + interest;
@@ -12,15 +10,21 @@ const getEMIAmount = function (numberOfEMI, amountToPay) {
   }
   return emiAmount;
 };
+const getPaidAmount = function (amountPaid, lumpsum, emiNumber) {
+  lumpsum.forEach((element) => {
+    if (element.emiNumber <= emiNumber) {
+      amountPaid = amountPaid + element.lumpsumAmount;
+    }
+  });
+  return amountPaid;
+};
 
 const getNumberOfEMI = (year) => Math.ceil(year * 12);
 
-const getValue = (value) => Number(value);
-
 const getKey = (name, bank) => name + "-" + bank;
 
-const getEmiRemaining = (borrower, amountPaid) =>
-  Math.ceil((borrower.amountToPay - amountPaid) / borrower.EMIAmount);
+const getEmiRemaining = (amountToPay, amountPaid, EMIAmount) =>
+  Math.ceil((amountToPay - amountPaid) / EMIAmount); // to calculate remaining emi
 
 class Ledger {
   constructor() {
@@ -29,44 +33,32 @@ class Ledger {
 
   loan(...args) {
     let [bank, name, principal, year, rate] = args;
-
-    const details = {};
+    const details = { principal, rate, year };
     const key = getKey(name, bank);
-    details.principal = getValue(principal);
-    details.rate = getValue(rate);
-    details.year = getValue(year);
     details.numberOfEMI = getNumberOfEMI(year);
-    details.amountToPay = getAmountToPay(details.principal, rate, year);
+    details.amountToPay = getAmountToPay(principal, rate, year);
     details.EMIAmount = getEMIAmount(details.numberOfEMI, details.amountToPay);
     details.lumpsum = [];
     this.borrowers[key] = { ...details };
   }
 
-  payment(args) {
-    let [bank, name, lumpsumAmount, EmiNumber] = args;
+  payment(...args) {
+    let [bank, name, lumpsumAmount, emiNumber] = args;
     const key = getKey(name, bank);
-    EmiNumber = getValue(EmiNumber);
-    this.borrowers[key].lumpsum.push({ lumpsumAmount, EmiNumber });
+    this.borrowers[key].lumpsum.push({ lumpsumAmount, emiNumber });
   }
 
   balance(...args) {
-    let [bank, name, EmiNumber] = args;
+    let [bank, name, emiNumber] = args;
     const key = getKey(name, bank);
-    const borrower = this.borrowers[key];
-    const amountToPay = borrower.amountToPay;
+    const { amountToPay, EMIAmount, lumpsum } = this.borrowers[key];
     let result = { bank, name, amountToPay, emiRemaining: 0 };
-    let amountPaid = borrower.EMIAmount * EmiNumber;
+    let amountPaid = EMIAmount * emiNumber;
 
-    borrower.lumpsum.forEach((element) => {
-      if (element.EmiNumber <= EmiNumber) {
-        amountPaid = amountPaid + +element.lumpsumAmount;
-      }
-    });
-
-    if (amountPaid < borrower.amountToPay) {
-      // to calculate remaining emi
+    amountPaid = getPaidAmount(amountPaid, lumpsum, emiNumber);
+    if (amountPaid < amountToPay) {
       result.amountToPay = Math.ceil(amountPaid);
-      result.emiRemaining = getEmiRemaining({ ...borrower }, amountPaid);
+      result.emiRemaining = getEmiRemaining(amountToPay, amountPaid, EMIAmount);
     }
     return result;
   }

@@ -2,19 +2,19 @@ const { Ledger } = require("./ledgerCo");
 
 const performOperation = function (ledger, operation, ...args) {
   //this function calls functions according to commands and returns the results.
-
+  const [bank, borrower, ...values] = args;
   let result;
   switch (operation) {
     case "LOAN":
-      ledger.loan(...args);
+      ledger.loan(bank, borrower, ...values.map(Number));
       break;
 
     case "PAYMENT":
-      ledger.payment(args);
+      ledger.payment(bank, borrower, ...values.map(Number));
       break;
 
     case "BALANCE":
-      result = ledger.balance(...args);
+      result = ledger.balance(bank, borrower, ...values.map(Number));
       break;
   }
   return result;
@@ -22,7 +22,6 @@ const performOperation = function (ledger, operation, ...args) {
 
 const processCommands = function (commands) {
   //for every command calls the performOperation function
-
   const ledger = new Ledger();
   const output = [];
   commands.forEach((command) => {
@@ -31,7 +30,6 @@ const processCommands = function (commands) {
     result = result ? Object.values(result) : undefined;
     result && output.push(result.join(" "));
   });
-  ledger.displayStructure(); // to display the structure finally created
   return output;
 };
 

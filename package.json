@@ -12,6 +12,7 @@
     "mocha": "^9.2.2"
   },
   "scripts": {
+    "start": "node geektrust.js",
     "test": "mocha"
   },
   "repository": {

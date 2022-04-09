@@ -27,8 +27,10 @@ const processCommands = function (commands) {
   const output = [];
   commands.forEach((command) => {
     const [operation, ...args] = command.split(" ");
-    const result = performOperation(ledger, operation, ...args);
+    let result = performOperation(ledger, operation, ...args);
+    result = result ? Object.values(result) : undefined;
     result && output.push(result.join(" "));
+    // console.log(result);
   });
   ledger.displayStructure(); // to display the structure finally created
   return output;

@@ -7,16 +7,14 @@ const getAmountToPay = function (principal, year, rate) {
 };
 
 const getEMIAmount = function (numberOfEMI, amountToPay) {
+  let emiAmount = 0;
   if (amountToPay > 0) {
-    return Math.ceil(amountToPay / numberOfEMI);
-  } else {
-    return 0;
+    emiAmount = Math.ceil(amountToPay / numberOfEMI);
   }
+  return emiAmount;
 };
 
-const getNumberOfEMI = function (year) {
-  return Math.ceil(year * 12);
-};
+const getNumberOfEMI = (year) => Math.ceil(year * 12);
 
 const getValue = (value) => Number(value);
 

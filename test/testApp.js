@@ -44,7 +44,7 @@ describe("#App Test", () => {
     });
   }),
     describe("Test Case 2", () => {
-      it("it should store all the attributes in the command", () => {
+      it("Test Case 3", () => {
         const ledger = new Ledger();
         ledger.loan(...["IDIDI", "Dale", 5000, 1, 6]);
         ledger.loan(...["MBI", "Harry", 10000, 3, 7]);
@@ -90,7 +90,7 @@ describe("#App Test", () => {
     });
 
   describe("Test Case 3", () => {
-    it("", () => {
+    it("Test Case 3", () => {
       const ledger = new Ledger();
       ledger.loan(...["IDIDI", "Dale", 4000, 3, 4]);
       ledger.loan(...["MBI", "Dale", 10000, 3, 7]);

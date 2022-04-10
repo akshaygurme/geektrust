@@ -1,7 +1,7 @@
 const { Ledger } = require("./ledgerCo");
 
 const performOperation = function (ledger, operation, ...args) {
-  //this function calls functions according to commands and returns the results.
+  //this function calls functions according to input commands.
   const [bank, borrower, ...values] = args;
   let result;
   switch (operation) {
@@ -21,15 +21,17 @@ const performOperation = function (ledger, operation, ...args) {
 };
 
 const processCommands = function (commands) {
-  //for every command calls the performOperation function
   const ledger = new Ledger();
   const output = [];
+
+  //for every command calls the performOperation function
   commands.forEach((command) => {
     const [operation, ...args] = command.split(" ");
     let result = performOperation(ledger, operation, ...args);
     result = result ? Object.values(result) : undefined;
     result && output.push(result.join(" "));
   });
+
   return output;
 };
 
